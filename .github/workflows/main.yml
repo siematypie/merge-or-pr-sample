@@ -13,8 +13,11 @@ jobs: #workflow can be running multiple jobs - they will run paraller to each ot
         startsWith(github.event.pull_request.head.ref, 'hotfix/') && 
         github.event.pull_request.base.ref == 'acceptance' 
       steps:
-        - name: Merge or PR #displayed on Github action page
-          uses: siematypie/merge-or-pr@v1.0 #specify that step is using action from market place
+        - uses: actions/checkout@v1
+          name: Checkout
+        - uses: ./
+#         - name: Merge or PR #displayed on Github action page
+#           uses: siematypie/merge-or-pr@v1.0 #specify that step is using action from market place
           id: merge-or-pr #thanks to id this step can be referenced by other steps, for example to get output
           with: #action parameters
             target_branch: "development"
